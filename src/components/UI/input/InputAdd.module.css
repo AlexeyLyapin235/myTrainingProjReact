@@ -1,0 +1,10 @@
+.InputAdd{
+    width: 250px;
+    height: 35px;
+    margin: 10px;
+    border: 1px solid red;
+    border-radius:10px ;
+}
+.greenFocus{
+    border: 2px solid green;
+}

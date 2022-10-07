@@ -1,0 +1,14 @@
+.adminToolAdd{
+    width: 300px;
+    height: 420px;
+    margin: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    padding: 10px;
+}
+.homeContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+.CardTocart{
+    margin: 10px;
+}

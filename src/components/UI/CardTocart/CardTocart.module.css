@@ -1,0 +1,20 @@
+.productItem{
+margin: 20px;
+
+
+}
+.CardTocart{
+    width: 300px;
+    height: 420px;
+    margin: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    padding: 10px;
+}
+.tocartImage{
+    width: 200px;
+    height: 200px;
+}
+.buttonAdmin{
+    display: flex;
+    justify-content: flex-end;
+}

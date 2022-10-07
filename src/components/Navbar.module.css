@@ -1,0 +1,11 @@
+.NavBar{
+    display: flex;
+    margin: 0px auto;
+    justify-content: center;
+    margin: 10px;
+    background: rgb(0, 76, 139);
+}
+.Link{
+    margin: 5px;
+    color: aliceblue;
+}
