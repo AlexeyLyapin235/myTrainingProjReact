@@ -1,52 +1,64 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { data } from '../../mosk/data'
+import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isAuth: false,
-  basketState:[],
-  admin:'',
-  tocart:[...data],
-  
-} 
+  basketState: [],
+  admin: false,
+  tocart: [],
+  firebase: "",
+  auth: "",
+  fireStore: "",
+};
 
 export const counterSlice = createSlice({
-  name: 'myState',
+  name: "myState",
   initialState,
   reducers: {
-    setAdmin:(state,actions) =>{
-     state.admin = actions.payload
+    setAdmin: (state) => {
+      state.admin = true;
     },
-    logged : (state) => {
-      state.isAuth =true
+    logged: (state) => {
+      state.isAuth = true;
     },
     exits: (state) => {
-      state.isAuth = false
+      state.isAuth = false;
     },
-    addTocartBasket:(state,actions) =>{
-      alert('Товар добавлен в корзину ')
-      state.basketState.push(actions.payload)
+    addTocartBasket: (state, actions) => {
+      alert("Товар добавлен в корзину ");
+      state.basketState.push(actions.payload);
     },
-    deletTocartBasket:(state,actions) => {
-    state.basketState.splice(actions.payload,1)
+    deletTocartBasket: (state, actions) => {
+      state.basketState.splice(actions.payload, 1);
     },
-    addCount:(state,actions) =>{
-      alert('Товар добавлен в корзину ')
-    state.basketState[actions.payload].count +=1
+    addCount: (state, actions) => {
+      alert("Товар добавлен в корзину ");
+      state.basketState[actions.payload].count += 1;
     },
-    standartTocart:(state,actions) =>{
-      state.tocart =actions.payload
+    standartTocart: (state, actions) => {
+      state.tocart = actions.payload;
     },
-    adminAddTocart:(state,actions)=>{
-      state.tocart.push(actions.payload)
+    adminAddTocart: (state, actions) => {
+      state.tocart.push(actions.payload);
     },
-    adminDeleteTocart:(state,actions)=>{
-     state.tocart = state.tocart.filter((el) => el.id !== actions.payload)
-  
-    }
-  
+    removeTocart: (state, actions) => {
+      state.tocart = actions.payload;
+    },
+    adminDeleteTocart: (state, actions) => {
+      state.tocart = state.tocart.filter((el) => el.id !== actions.payload);
+    },
   },
-})
+});
 
-// Action creators are generated for each case reducer function
-export const { logged , exits,addTocartBasket,deletTocartBasket,addCount,setAdmin,standartTocart,adminAddTocart,adminDeleteTocart } = counterSlice.actions
+export const {
+  logged,
+  exits,
+  addTocartBasket,
+  deletTocartBasket,
+  addCount,
+  setAdmin,
+  standartTocart,
+  adminAddTocart,
+  adminDeleteTocart,
+  removeTocart,
+} = counterSlice.actions;
 
-export default counterSlice.reducer
+export default counterSlice.reducer;

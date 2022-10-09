@@ -15,12 +15,12 @@ const CardTocart = ({tocartName,tocarPrice,tocartImage,addTocart,tocartId,delete
       if(myAdmin){
           setAdminToolsDelete(true);
       }
-  }
+  };
   const focusAdminLeave =()=>{
       if(myAdmin){
           setAdminToolsDelete(false);    
       }
-  }
+  };
   
   
   return(

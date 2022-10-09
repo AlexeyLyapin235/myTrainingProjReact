@@ -4,10 +4,10 @@ import Basket from './pages/Basket';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
 import UserProfile from './pages/UserProfile';
 import RequireAuth from './components/hok/RequireAuth';
+import Registration from './pages/Registration';
+import Login from './pages/Login';
 
 
 
@@ -23,9 +23,9 @@ function App() {
        <Routes>
           <Route path="/basket" element={<RequireAuth><Basket/></RequireAuth>} />
           <Route path="/" element={<RequireAuth><Home/></RequireAuth>} />
-          <Route path="/register" element={<RegisterPage/>} />
-          <Route path="/login" element={<LoginPage/>} />
           <Route path="/profil" element={<RequireAuth><UserProfile/></RequireAuth>} />
+          <Route path="/registration" element={<Registration/>} />
+          <Route path="/login" element={<Login/>} />
       </Routes>
       
     </div>

@@ -21,7 +21,7 @@ const enter = useSelector((state) => state.myState.isAuth)
     return(
     <nav className={cl.NavBar}>
     <Link className={cl.Link}  to="/">Home</Link>
-    <Link className={cl.Link}  to="/register">Регистрация</Link>
+    <Link className={cl.Link}  to="/registration">Регистрация</Link>
     <Link className={cl.Link}  to="/login">Войти</Link>
     </nav>
     )
