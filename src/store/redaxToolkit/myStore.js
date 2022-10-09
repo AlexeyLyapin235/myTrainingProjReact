@@ -4,15 +4,25 @@ const initialState = {
   basketState: [],
   admin: false,
   tocart: [],
-  firebase: "",
-  auth: "",
-  fireStore: "",
+  email:"",
+  creationTime:"",
+  lastSignInTime:"",
+
 };
 
 export const counterSlice = createSlice({
   name: "myState",
   initialState,
   reducers: {
+    setEmailStore:(state,actions) =>{
+      state.email = actions.payload
+    },
+    setCreationTime:(state,actions) =>{
+      state.creationTime = actions.payload
+    },
+    setLastSignInTime:(state,actions) =>{
+      state.lastSignInTime = actions.payload
+    },
     setAdmin: (state) => {
       state.admin = true;
     },
@@ -59,6 +69,9 @@ export const {
   adminAddTocart,
   adminDeleteTocart,
   removeTocart,
+  setEmailStore,
+  setCreationTime,
+  setLastSignInTime
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

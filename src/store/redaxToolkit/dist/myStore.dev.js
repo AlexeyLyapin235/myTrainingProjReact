@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.removeTocart = exports.adminDeleteTocart = exports.adminAddTocart = exports.standartTocart = exports.setAdmin = exports.addCount = exports.deletTocartBasket = exports.addTocartBasket = exports.exits = exports.logged = exports.counterSlice = void 0;
+exports["default"] = exports.setLastSignInTime = exports.setCreationTime = exports.setEmailStore = exports.removeTocart = exports.adminDeleteTocart = exports.adminAddTocart = exports.standartTocart = exports.setAdmin = exports.addCount = exports.deletTocartBasket = exports.addTocartBasket = exports.exits = exports.logged = exports.counterSlice = void 0;
 
 var _toolkit = require("@reduxjs/toolkit");
 
@@ -12,14 +12,23 @@ var initialState = {
   basketState: [],
   admin: false,
   tocart: [],
-  firebase: "",
-  auth: "",
-  fireStore: ""
+  email: "",
+  creationTime: "",
+  lastSignInTime: ""
 };
 var counterSlice = (0, _toolkit.createSlice)({
   name: "myState",
   initialState: initialState,
   reducers: {
+    setEmailStore: function setEmailStore(state, actions) {
+      state.email = actions.payload;
+    },
+    setCreationTime: function setCreationTime(state, actions) {
+      state.creationTime = actions.payload;
+    },
+    setLastSignInTime: function setLastSignInTime(state, actions) {
+      state.lastSignInTime = actions.payload;
+    },
     setAdmin: function setAdmin(state) {
       state.admin = true;
     },
@@ -67,7 +76,13 @@ var _counterSlice$actions = counterSlice.actions,
     standartTocart = _counterSlice$actions.standartTocart,
     adminAddTocart = _counterSlice$actions.adminAddTocart,
     adminDeleteTocart = _counterSlice$actions.adminDeleteTocart,
-    removeTocart = _counterSlice$actions.removeTocart;
+    removeTocart = _counterSlice$actions.removeTocart,
+    setEmailStore = _counterSlice$actions.setEmailStore,
+    setCreationTime = _counterSlice$actions.setCreationTime,
+    setLastSignInTime = _counterSlice$actions.setLastSignInTime;
+exports.setLastSignInTime = setLastSignInTime;
+exports.setCreationTime = setCreationTime;
+exports.setEmailStore = setEmailStore;
 exports.removeTocart = removeTocart;
 exports.adminDeleteTocart = adminDeleteTocart;
 exports.adminAddTocart = adminAddTocart;

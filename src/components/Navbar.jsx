@@ -1,29 +1,38 @@
 import React from "react";
-import {Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import cl from "./Navbar.module.css"
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import cl from "./Navbar.module.css";
 
-const Navbar = () =>{
+const Navbar = () => {
+  const enter = useSelector((state) => state.myState.isAuth);
+  if (enter) {
+    return (
+      <nav className={cl.NavBar}>
+        <Link className={cl.Link} to="/">
+          Home
+        </Link>
+        <Link className={cl.Link} to="/basket">
+          Корзина
+        </Link>
+        <Link className={cl.Link} to="/profil">
+          Мой профиль
+        </Link>
+      </nav>
+    );
+  }
 
-
-    
-const enter = useSelector((state) => state.myState.isAuth)
-    if(enter){
-        return(
-        <nav className={cl.NavBar} >
-           <Link className={cl.Link} to="/">Home</Link>
-           <Link className={cl.Link} to="/basket">Корзина</Link>
-           <Link className={cl.Link} to="/profil">Мой профиль</Link>
-        </nav>
-        )
-      }
-
-    return(
+  return (
     <nav className={cl.NavBar}>
-    <Link className={cl.Link}  to="/">Home</Link>
-    <Link className={cl.Link}  to="/registration">Регистрация</Link>
-    <Link className={cl.Link}  to="/login">Войти</Link>
+      <Link className={cl.Link} to="/">
+        Home
+      </Link>
+      <Link className={cl.Link} to="/registration">
+        Регистрация
+      </Link>
+      <Link className={cl.Link} to="/login">
+        Войти
+      </Link>
     </nav>
-    )
-}
-export default Navbar
+  );
+};
+export default Navbar;
