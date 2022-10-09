@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { data } from '../../mosk/data'
 const initialState = {
-  value: false,
+  isAuth: false,
   basketState:[],
   admin:'',
-  tocart:[...data]
+  tocart:[...data],
+  
 } 
 
 export const counterSlice = createSlice({
@@ -15,10 +16,10 @@ export const counterSlice = createSlice({
      state.admin = actions.payload
     },
     logged : (state) => {
-      state.value =true
+      state.isAuth =true
     },
     exits: (state) => {
-      state.value = false
+      state.isAuth = false
     },
     addTocartBasket:(state,actions) =>{
       alert('Товар добавлен в корзину ')
@@ -39,7 +40,7 @@ export const counterSlice = createSlice({
     },
     adminDeleteTocart:(state,actions)=>{
      state.tocart = state.tocart.filter((el) => el.id !== actions.payload)
-      console.log('я тут');
+  
     }
   
   },

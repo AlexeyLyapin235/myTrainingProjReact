@@ -7,7 +7,7 @@ const CardBasket = ({tocartName,tocartPrice,count,tocartImage,deleteItem,tocartI
 
     return(
   <div className={cl.containerBasket}>
-    <img src={tocartImage} className={cl.CardBasketImage}/>
+    <img src={tocartImage} className={cl.CardBasketImage} alt="Картинка не загрузилась"/>
     <div className={cl.buttons}>
     <ButtonTocart className={cl.quikviewbutton} title="удалить с корзины" onClick={()=>deleteItem(tocartId)}>Удалить из корзины</ButtonTocart>
     </div>

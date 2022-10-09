@@ -30,7 +30,9 @@ const [rezervTocart,setRezervTocart] = useState([]);
 const [ currentPage,setCurrentPage ] = useState(1);
 const [tocarPerPage] = useState(5);
 const totalPageCount =[]
-useEffect(()=>{watchPaginated()},[tocartHome,currentPage]);
+useEffect(()=>{watchPaginated()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+},[tocartHome,currentPage]);
 
 const watchPaginated =  async ()=>{
 const lastIndex =  currentPage * tocarPerPage;
@@ -48,6 +50,7 @@ const filtered = tocartHome.filter((el)=> el.title.toLowerCase().includes(search
 setRezervTocart(filtered)}
 else{
 setRezervTocart(tocartHome)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }},[search])
 
 useMemo(()=>{
@@ -55,15 +58,19 @@ const count = tocartHome.length;
 const total = Math.ceil(count / 5);
 for(let i = 0 ; i < total;i++){
 totalPageCount.push(i)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }},[rezervTocart])
 
 useEffect(()=>{
 if(sortTocart === 'Цена по увелечению'){
-setRezervTocart(rezervTocart.slice().sort((a,b)=>(a.price > b.price ? 1:-1)))
+    const sorted = rezervTocart.slice().sort((a,b)=>(a.price > b.price ? 1:-1))
+setRezervTocart(sorted)
 }
 if(sortTocart === 'Цена по уменьшению'){
- setRezervTocart(rezervTocart.slice().sort((a,b)=>(a.price < b.price ? 1:-1)))
+    const sortedMin = rezervTocart.slice().sort((a,b)=>(a.price < b.price ? 1:-1))
+ setRezervTocart(sortedMin)
 }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 },[sortTocart])
 
 const addTocart = (price,name,url,id) =>{

@@ -7,7 +7,7 @@ const Navbar = () =>{
 
 
     
-const enter = useSelector((state) => state.myState.value)
+const enter = useSelector((state) => state.myState.isAuth)
     if(enter){
         return(
         <nav className={cl.NavBar} >
@@ -21,10 +21,8 @@ const enter = useSelector((state) => state.myState.value)
     return(
     <nav className={cl.NavBar}>
     <Link className={cl.Link}  to="/">Home</Link>
-    
     <Link className={cl.Link}  to="/register">Регистрация</Link>
     <Link className={cl.Link}  to="/login">Войти</Link>
-      
     </nav>
     )
 }

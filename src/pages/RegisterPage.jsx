@@ -15,7 +15,7 @@ const [email,setEmail] = useState('');
 const adminName = 'admin'
 const [password,setPassword] = useState('');
 let navigate = useNavigate();
-const enter = useSelector((state) => state.myState.value)
+const enter = useSelector((state) => state.myState.isAuth)
 const dispatch = useDispatch()
 const  register = async() =>{
 if(!login || !email || !password){return}
@@ -30,7 +30,10 @@ if(!login || !email || !password){return}
     if(res.data.user.username === adminName.toLocaleLowerCase()){
        dispatch(setAdmin(adminName.toLocaleLowerCase()))}})
     }
-useEffect(() => {if (enter){ return navigate("/");}},[enter]);
+useEffect(() => {if (enter)
+    { return navigate("/")}}
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    ,[enter]);
     return(
     <div>
         <MyTitle>Регистрация</MyTitle>

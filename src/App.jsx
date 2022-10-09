@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import UserProfile from './pages/UserProfile';
+import RequireAuth from './components/hok/RequireAuth';
 
 
 
@@ -20,24 +21,13 @@ function App() {
     <div className="App">
       <Navbar/>
        <Routes>
-          <Route path="/basket" element={<Basket/>} />
-      </Routes>
-      <Routes>
-          <Route path="/" element={<Home/>} />
-      </Routes>
-      <Routes>
+          <Route path="/basket" element={<RequireAuth><Basket/></RequireAuth>} />
+          <Route path="/" element={<RequireAuth><Home/></RequireAuth>} />
           <Route path="/register" element={<RegisterPage/>} />
-      </Routes>
-      <Routes>
           <Route path="/login" element={<LoginPage/>} />
-      </Routes>
-      <Routes>
-          <Route path="/profil" element={<UserProfile/>} />
+          <Route path="/profil" element={<RequireAuth><UserProfile/></RequireAuth>} />
       </Routes>
       
-    
-      
-     
     </div>
   );
 }

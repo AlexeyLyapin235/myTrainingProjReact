@@ -8,7 +8,7 @@ import Api from '../api/axios.js'
 import ButtonTocart from '../components/UI/buttons/ButtonTocart'
 
 export function LoginPage() {
-  const enter = useSelector((state) => state.myState.value);
+  const enter = useSelector((state) => state.myState.isAuth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const adminName = 'admin'
@@ -19,6 +19,7 @@ useEffect(() => {
     if (enter){
        return navigate("/");
     }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
  },[enter]);
 const login = async ()=>{
     if(!userLogin || !userPassword){return}

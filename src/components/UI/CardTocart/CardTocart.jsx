@@ -29,7 +29,7 @@ const CardTocart = ({tocartName,tocarPrice,tocartImage,addTocart,tocartId,delete
     <div className={cl.productItem}>
       <div>
     
-    <img className={cl.tocartImage} src={tocartImage}/>
+    <img className={cl.tocartImage} src={tocartImage} alt="Картинка не загрузилась"/>
       </div>
     <div className="product-list">
     <h3>{tocartName}</h3>
