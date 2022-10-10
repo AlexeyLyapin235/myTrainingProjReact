@@ -1,9 +1,15 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import cl from './InputAdd.module.css'
 
-const InputAdd = ({children, greenfocus,...props}) =>{
+const InputAdd = ({children,value,...props}) =>{
   const classes = [cl.InputAdd]
-  if(greenfocus === true){
+  const [greenFocusName, setGreenFocus] = useState(false);
+  useEffect(() => {
+    value.length > 0 ? setGreenFocus(true) : setGreenFocus(false);
+  }, [value]);
+
+
+  if(greenFocusName === true){
     classes.push(cl.greenFocus)
   }
 
@@ -11,7 +17,7 @@ const InputAdd = ({children, greenfocus,...props}) =>{
 
         <div>
             
-        <input {...props} className={classes.join(' ')}  />
+        <input {...props} value={value} className={classes.join(' ')}  />
         </div>
    
     )

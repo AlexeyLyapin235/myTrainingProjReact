@@ -122,7 +122,7 @@ const Home = () => {
   };
 
   const deleteTocartHome = async (id) => {
-    deleteDoc(doc(db, "test", `${id}`));
+   await deleteDoc(doc(db, "test", `${id}`));
     getTocarts();
   };
   const adminToolAddTocart = async () => {

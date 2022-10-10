@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ButtonTocart from "../components/UI/buttons/ButtonTocart";
-import AuthInput from "../components/UI/input/AuthInput";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import {
@@ -10,6 +9,7 @@ import {
   setLastSignInTime,
 } from "../store/redaxToolkit/myStore";
 import { useNavigate } from "react-router-dom";
+import InputAdd from "../components/UI/input/InputAdd";
 
 const Registration = () => {
   const [email, setEmail] = useState("");
@@ -41,13 +41,14 @@ const Registration = () => {
   };
   return (
     <div>
-      <AuthInput
+      
+      <InputAdd
         value={email}
         type="email"
         placeholder="Введите эмаил"
         onChange={(event) => setEmail(event.target.value)}
       />
-      <AuthInput
+      <InputAdd
         value={password}
         type="password"
         placeholder="Введите пароль"

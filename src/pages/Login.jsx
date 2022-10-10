@@ -2,7 +2,6 @@ import React from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import AuthInput from "../components/UI/input/AuthInput";
 import ButtonTocart from "../components/UI/buttons/ButtonTocart";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,6 +11,7 @@ import {
   setCreationTime,
   setLastSignInTime,
 } from "../store/redaxToolkit/myStore";
+import InputAdd from "../components/UI/input/InputAdd";
 
 const Login = () => {
   const auth = getAuth();
@@ -42,13 +42,14 @@ const Login = () => {
 
   return (
     <div>
-      <AuthInput
+      
+      <InputAdd
         value={email}
         type="email"
         placeholder="Введите эмаил"
         onChange={(event) => setEmail(event.target.value)}
       />
-      <AuthInput
+      <InputAdd
         value={password}
         type="password"
         placeholder="Введите пароль"
