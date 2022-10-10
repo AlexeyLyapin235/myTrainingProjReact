@@ -25,6 +25,7 @@ const AddTocartHome = ({
       ></InputAdd>
       <InputAdd
         value={inputPrice}
+        type='number'
         onChange={(event) => setPrice(event.target.value)}
         placeholder="введите цену товара "
       ></InputAdd>

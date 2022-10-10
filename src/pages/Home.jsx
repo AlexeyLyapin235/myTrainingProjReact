@@ -78,6 +78,7 @@ const Home = () => {
       setRezervTocart(filtered);
     } else {
       setRezervTocart(tocartHome);
+      watchPaginated()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
@@ -132,7 +133,7 @@ const Home = () => {
         url: newTocartUrl,
         title: newTocartName,
         price: newTocartPrice,
-        id: Date.now(),
+        id: keyCollection,
       });
       setUrl("");
       setName("");
