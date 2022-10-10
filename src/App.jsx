@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import UserProfile from "./pages/UserProfile";
-import RequireAuth from "./components/hok/RequireAuth";
+import RequireAuth from "./components/hoc/RequireAuth";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 

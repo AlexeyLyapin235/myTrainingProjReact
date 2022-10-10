@@ -6,7 +6,7 @@ import {
   addCount,
   adminAddTocart,
   removeTocart,
-} from "../store/redaxToolkit/myStore";
+} from "../store/reduxToolkit/myStore";
 import AddTocartHome from "../components/adminTools/AddTocartHome";
 import cl from "./Home.module.css";
 import { useState } from "react";
@@ -145,7 +145,7 @@ const Home = () => {
       <SearchInput value={search} setSearch={setSearch} />
       <DropDawfFilter value={sortTocart} setSortTocart={setSortTocart} />
       <div className={cl.homeContainer}>
-        {myAdmin === true ? (
+        {myAdmin === true && (
           <div className={cl.adminToolAdd}>
             <AddTocartHome
               inputUrl={newTocartUrl}
@@ -157,8 +157,6 @@ const Home = () => {
               adminToolAddTocart={adminToolAddTocart}
             />
           </div>
-        ) : (
-          ""
         )}
         {rezervTocart.map((el) => (
           <CardTocart
@@ -173,7 +171,6 @@ const Home = () => {
           />
         ))}
       </div>
-      <div></div>
       <div>
         {totalPageCount.map((el) => (
           <PaginatedButton key={el} page={el + 1} paginations={paginations}>

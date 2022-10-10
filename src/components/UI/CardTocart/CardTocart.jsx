@@ -25,7 +25,7 @@ const CardTocart = ({tocartName,tocarPrice,tocartImage,addTocart,tocartId,delete
   
   return(
   <div className={cl.CardTocart} onMouseOver={focusAdmin} onMouseOut={focusAdminLeave}>
-    {adminToolsDelete ? <DeleteButton onClick={() => deleteTocartHome(tocartId)}></DeleteButton> : ''}
+    {adminToolsDelete && <DeleteButton onClick={() => deleteTocartHome(tocartId)}></DeleteButton>}
     <div className={cl.productItem}>
       <div>
     

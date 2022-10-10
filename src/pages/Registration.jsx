@@ -7,7 +7,7 @@ import {
   setEmailStore,
   setCreationTime,
   setLastSignInTime,
-} from "../store/redaxToolkit/myStore";
+} from "../store/reduxToolkit/myStore";
 import { useNavigate } from "react-router-dom";
 import InputAdd from "../components/UI/input/InputAdd";
 
@@ -32,7 +32,6 @@ const Registration = () => {
         dispatch(setEmailStore(user.email));
         dispatch(setCreationTime(user.metadata.creationTime));
         dispatch(setLastSignInTime(user.metadata.lastSignInTime));
-        console.log(user.metadata);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -41,7 +40,6 @@ const Registration = () => {
   };
   return (
     <div>
-      
       <InputAdd
         value={email}
         type="email"

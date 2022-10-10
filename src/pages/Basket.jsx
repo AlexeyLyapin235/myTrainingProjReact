@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardBasket from "../components/UI/CardTocart/CardBasket";
-import { deletTocartBasket } from "../store/redaxToolkit/myStore";
+import { deletTocartBasket } from "../store/reduxToolkit/myStore";
 import cl from "./Basket.module.css";
 import TotalCardBasket from "../components/UI/CardTocart/TotalCarbBasket";
 import { useMemo } from "react";

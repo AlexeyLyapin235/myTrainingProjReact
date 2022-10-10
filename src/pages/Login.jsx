@@ -10,7 +10,7 @@ import {
   setEmailStore,
   setCreationTime,
   setLastSignInTime,
-} from "../store/redaxToolkit/myStore";
+} from "../store/reduxToolkit/myStore";
 import InputAdd from "../components/UI/input/InputAdd";
 
 const Login = () => {

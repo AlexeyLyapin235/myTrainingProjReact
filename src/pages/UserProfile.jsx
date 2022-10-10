@@ -2,7 +2,7 @@ import React from "react";
 import MyTitle from "../components/UI/title/MyTitle";
 import Paragraph from "../components/UI/paragraph/Paragraph";
 import { useDispatch, useSelector } from "react-redux";
-import { exits } from "../store/redaxToolkit/myStore";
+import { exits } from "../store/reduxToolkit/myStore";
 import { useNavigate } from "react-router-dom";
 import ButtonTocart from "../components/UI/buttons/ButtonTocart";
 
