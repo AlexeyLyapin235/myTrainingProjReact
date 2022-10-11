@@ -96,13 +96,13 @@ const Home = () => {
     if (sortTocart === "Цена по увелечению") {
       const sorted = rezervTocart
         .slice()
-        .sort((a, b) => (a.price > b.price ? 1 : -1));
+        .sort((a, b) => (Number(a.price) > Number(b.price) ? 1 : -1));
       setRezervTocart(sorted);
     }
     if (sortTocart === "Цена по уменьшению") {
       const sortedMin = rezervTocart
         .slice()
-        .sort((a, b) => (a.price < b.price ? 1 : -1));
+        .sort((a, b) => (Number(a.price) < Number(b.price) ? 1 : -1));
       setRezervTocart(sortedMin);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
