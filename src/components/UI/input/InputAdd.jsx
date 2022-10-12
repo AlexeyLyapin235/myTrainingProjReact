@@ -16,7 +16,6 @@ const InputAdd = ({children,value,...props}) =>{
     return(
 
         <div>
-            
         <input {...props} value={value} className={classes.join(' ')}  />
         </div>
    

@@ -1,0 +1,14 @@
+.defaultChat{
+    width: 500px;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background:rgb(0, 76, 139);
+    border-radius: 15px;
+    margin: 10px;
+}
+.text{
+    color: white;
+    font-size: 24px;
+}

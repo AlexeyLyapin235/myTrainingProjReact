@@ -7,6 +7,7 @@ const initialState = {
   email:"",
   creationTime:"",
   lastSignInTime:"",
+  chat:false,
 
 };
 
@@ -14,6 +15,9 @@ export const counterSlice = createSlice({
   name: "myState",
   initialState,
   reducers: {
+    setChat:(state,actions) =>{
+      state.chat = actions.payload
+    },
     setEmailStore:(state,actions) =>{
       state.email = actions.payload
     },
@@ -71,7 +75,8 @@ export const {
   removeTocart,
   setEmailStore,
   setCreationTime,
-  setLastSignInTime
+  setLastSignInTime,
+  setChat
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

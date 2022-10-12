@@ -28,7 +28,6 @@ const Registration = () => {
         dispatch(logged());
         navigate("/");
         localStorage.setItem("Token", user.accessToken);
-        console.log(user.email);
         dispatch(setEmailStore(user.email));
         dispatch(setCreationTime(user.metadata.creationTime));
         dispatch(setLastSignInTime(user.metadata.lastSignInTime));

@@ -1,0 +1,57 @@
+.blockMessage{
+    width: 500px;
+    height: 350px;
+    background: white;
+    margin: 10px;
+    overflow: auto;
+}
+.blockForm{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.blockChat{
+    width: 500px;
+    height: 400px;
+    background: rgb(0, 76, 139);;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.chatUserImage{
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+}
+.time-right {
+    float: right;
+    color: #aaa;
+}
+.mesages{
+    font-size: 16px;
+    color: blue;
+    margin-left: 10px;
+}
+.messageUser{
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+}
+
+.closeChat{
+position: absolute;
+    right: 20px;
+    top: 0px;
+    width: 96%;
+    height: 15px;
+    background: white;
+}

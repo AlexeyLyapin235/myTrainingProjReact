@@ -6,7 +6,9 @@ import {
   addCount,
   adminAddTocart,
   removeTocart,
+  setChat
 } from "../store/reduxToolkit/myStore";
+import { getDatabase, ref, set ,onValue} from "firebase/database";
 import AddTocartHome from "../components/adminTools/AddTocartHome";
 import cl from "./Home.module.css";
 import { useState } from "react";
@@ -24,6 +26,8 @@ import {
   setDoc,
   doc,
 } from "firebase/firestore";
+import Chat from "../components/Chat";
+import OpenRealTimeChat from "../components/OpenRealTimeChat";
 
 const Home = () => {
   const getTocarts = async () => {
@@ -39,10 +43,11 @@ const Home = () => {
     getTocarts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const chat = useSelector((state) => state.myState.chat);
   const tocart = useSelector((state) => state.myState.basketState);
   const myAdmin = useSelector((state) => state.myState.admin);
   const tocartHome = useSelector((state) => state.myState.tocart);
+  const userEmail = useSelector((state)=> state.myState.email)
   const dispatch = useDispatch();
   const [sortTocart, setSortTocart] = useState("");
   const [search, setSearch] = useState("");
@@ -121,7 +126,6 @@ const Home = () => {
       ? dispatch(addTocartBasket(basket))
       : dispatch(addCount(findElem));
   };
-
   const deleteTocartHome = async (id) => {
    await deleteDoc(doc(db, "test", `${id}`));
     getTocarts();
@@ -141,6 +145,51 @@ const Home = () => {
       getTocarts();
     }
   };
+const [message,setMessage] = useState("");
+const [messages , setMessages] = useState([]);
+const dbs = getDatabase();
+const starCountRef = ref(dbs,'users/');
+const filter = (data) =>{ 
+  const arr = []
+  for(let key in data){
+    let obj = {
+      emai:data[key].email,
+      mesages:data[key].message,
+      id:key
+    }
+    arr.push(obj)
+    }
+    return arr
+  }
+useEffect(()=>{
+         // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  onValue(starCountRef, (snapshot) => {
+    const data = snapshot.val();
+   const mesenger =  filter(data);
+   console.log(mesenger);
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+
+   setMessages(mesenger)
+  });
+},[])
+
+  const addMessages =  () =>{
+      set(ref(dbws, 'users/' + keyCol), {
+      email: userEmail,
+      message:message
+    });
+    setMessage('')
+    }
+    const keyCol = Date.now();
+    const dbws = getDatabase();
+
+    const openChat = () =>{
+      return dispatch(setChat(true))
+    }
+    const closeChat =()=>{
+      return dispatch(setChat(false))
+    }
   return (
     <div>
       <SearchInput value={search} setSearch={setSearch} />
@@ -178,6 +227,10 @@ const Home = () => {
             {el + 1}
           </PaginatedButton>
         ))}
+      </div>
+      <div>
+        {chat === true ? <Chat closeChat={closeChat} messages={messages} message={message} setMessage={setMessage} addMessages={addMessages}></Chat> : <OpenRealTimeChat openChat={openChat}></OpenRealTimeChat> }
+       
       </div>
     </div>
   );
