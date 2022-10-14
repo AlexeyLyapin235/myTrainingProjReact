@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { exits } from "../store/reduxToolkit/myStore";
 import { useNavigate } from "react-router-dom";
 import ButtonTocart from "../components/UI/buttons/ButtonTocart";
+import cl from './UserProfile.module.css'
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
+    <div className={cl.UserProfile}>
       <MyTitle>Профиль</MyTitle>
       <Paragraph>эмаил: {userEmail}</Paragraph>
       <Paragraph>Дата регистрации: {userCreated}</Paragraph>

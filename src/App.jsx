@@ -8,6 +8,8 @@ import UserProfile from "./pages/UserProfile";
 import RequireAuth from "./components/hoc/RequireAuth";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
+import Footer from "./components/Footer";
+
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }

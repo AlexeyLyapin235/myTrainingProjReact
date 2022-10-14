@@ -4,17 +4,28 @@ margin: 20px;
 
 }
 .CardTocart{
-    width: 300px;
-    height: 420px;
+    width: 500px;
+    height: 500px;
     margin: 15px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); 
     padding: 10px;
+    display: flex;
+
 }
 .tocartImage{
     width: 200px;
     height: 200px;
+    border: 1px solid blueviolet;
 }
 .buttonAdmin{
     display: flex;
     justify-content: flex-end;
+}
+.commentBlock{
+    width: 300px;
+    height: 380px;
+    overflow: auto;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); 
+
+
 }

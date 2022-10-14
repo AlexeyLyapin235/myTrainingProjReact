@@ -138,6 +138,7 @@ const Home = () => {
         title: newTocartName,
         price: newTocartPrice,
         id: keyCollection,
+        comment: [],
       });
       setUrl("");
       setName("");
@@ -169,7 +170,7 @@ const Home = () => {
       const mesenger = filter(data);
       setMessages(mesenger);
     });
-     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addMessages = () => {
@@ -208,6 +209,7 @@ const Home = () => {
         )}
         {rezervTocart.map((el) => (
           <CardTocart
+            userEmail={userEmail}
             className={cl.CardTocart}
             deleteTocartHome={deleteTocartHome}
             tocarPrice={el.price}
@@ -216,6 +218,8 @@ const Home = () => {
             key={el.id}
             tocartId={el.id}
             addTocart={addTocart}
+            commentsArray={el.comment}
+            el={el}
           />
         ))}
       </div>

@@ -1,0 +1,21 @@
+.chatUserImage{
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+}
+.messageUser{
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.mesages{
+    font-size: 16px;
+    color: blue;
+    margin-left: 10px;
+}
