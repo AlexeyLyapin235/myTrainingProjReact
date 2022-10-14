@@ -40,6 +40,7 @@ const Home = () => {
   };
 
   useEffect(() => {
+    dispatch(removeTocart([]));
     getTocarts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -62,7 +63,7 @@ const Home = () => {
   useEffect(() => {
     watchPaginated();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tocartHome, currentPage]);
+  }, [tocartHome, currentPage,chat]);
 
   const watchPaginated = async () => {
     const lastIndex = currentPage * tocarPerPage;

@@ -25,6 +25,7 @@ const CardTocart = ({
   const [rezervComment, setRezervComment] = useState([]);
   useEffect(() => {
     setRezervComment(el.comment);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const focusAdmin = () => {
