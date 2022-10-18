@@ -1,30 +1,23 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import CardBasket from "../components/UI/CardTocart/CardBasket";
 import { deletTocartBasket } from "../store/reduxToolkit/myStore";
 import cl from "./Basket.module.css";
 import TotalCardBasket from "../components/UI/CardTocart/TotalCarbBasket";
 import { useMemo } from "react";
-import { useState } from "react";
+import { useBasket } from "../hooks/basket";
 
 const Basket = () => {
-  const tocartInBasket = useSelector((state) => state.myState.basketState);
-  const dispatch = useDispatch();
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [totalCount, setTotalCount] = useState(0);
-
+ 
+     const dispatch = useDispatch();
   const deleteTocart = (id) => {
     const deletItemIndex = tocartInBasket.findIndex((el) => el.id === id);
     dispatch(deletTocartBasket(deletItemIndex));
   };
+  const [totalPrice,totalCount,tocartInBasket,totalBasket] = useBasket()
   useMemo(() => {
-    const sumPrice = tocartInBasket.reduce(
-      (sum, el) => sum + el.price * el.count,
-      0
-    );
-    const sumCount = tocartInBasket.reduce((sum, el) => sum + el.count, 0);
-    setTotalPrice(sumPrice);
-    setTotalCount(sumCount);
+    totalBasket()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tocartInBasket]);
   return (
     <div>

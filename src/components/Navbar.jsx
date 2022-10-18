@@ -5,7 +5,9 @@ import cl from "./Navbar.module.css";
 
 const Navbar = () => {
   const enter = useSelector((state) => state.myState.isAuth);
-  if (enter) {
+  const isAdmin = useSelector((state) => state.myState.admin);
+
+  if (enter && isAdmin === false) {
     return (
       <nav className={cl.NavBar}>
         <Link className={cl.Link} to="/">
@@ -20,7 +22,24 @@ const Navbar = () => {
       </nav>
     );
   }
-
+if(isAdmin){
+  return(
+    <nav className={cl.NavBar}>
+        <Link className={cl.Link} to="/">
+          Home
+        </Link>
+        <Link className={cl.Link} to="/adminToolsUsers">
+          Пользователи
+        </Link>
+        <Link className={cl.Link} to="/basket">
+          Корзина
+        </Link>
+        <Link className={cl.Link} to="/profil">
+          Мой профиль
+        </Link>
+      </nav>
+  )
+}
   return (
     <nav className={cl.NavBar}>
       <Link className={cl.Link} to="/">

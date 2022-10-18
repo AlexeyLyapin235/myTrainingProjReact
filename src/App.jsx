@@ -9,6 +9,8 @@ import RequireAuth from "./components/hoc/RequireAuth";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
+import AdminToolsUsers from "./pages/AdminToolsUsers";
+import AdminAuth from "./components/hoc/AdminAuth";
 
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
         />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/adminToolsUsers" element={<AdminAuth><AdminToolsUsers/></AdminAuth>} />
       </Routes>
       <Footer></Footer>
     </div>

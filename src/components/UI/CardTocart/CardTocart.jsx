@@ -6,9 +6,9 @@ import { useState } from "react";
 import DeleteButton from "../buttons/DeleteButton";
 import TextArea from "../input/TextArea";
 import Comments from "../../Comments";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../../..";
 import { useEffect } from "react";
+import { addComent } from "../../../api/firestore";
+import { useFocus } from "../../../hooks/focus";
 
 const CardTocart = ({
   userEmail,
@@ -28,17 +28,10 @@ const CardTocart = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const focusAdmin = () => {
-    if (myAdmin) {
-      setAdminToolsDelete(true);
-    }
-  };
-  const focusAdminLeave = () => {
-    if (myAdmin) {
-      setAdminToolsDelete(false);
-    }
-  };
+  
+  const [focus,focusLeave] = useFocus(myAdmin,setAdminToolsDelete)
   const [comment, setComment] = useState("");
+  const [viewComments,setViewComments] = useState(false);
 
   const addComments = async (id) => {
     if (userEmail && comment) {
@@ -47,21 +40,19 @@ const CardTocart = ({
         comment: comment,
         commentId: Date.now(),
       };
-      const washingtonRef = doc(db, "test", `${id}`);
-      await updateDoc(washingtonRef, {
-        comment: arrayUnion(objComent),
-      }).then(() => {
+      addComent(objComent,id).then(() => {
         setComment("");
         setRezervComment([...rezervComment, objComent]);
       });
+     
     }
   };
 
   return (
     <div
       className={cl.CardTocart}
-      onMouseOver={focusAdmin}
-      onMouseOut={focusAdminLeave}
+      onMouseOver={focus}
+      onMouseOut={focusLeave}
     >
       {adminToolsDelete && (
         <DeleteButton onClick={() => deleteTocartHome(tocartId)}></DeleteButton>
@@ -94,16 +85,18 @@ const CardTocart = ({
         </div>
       </div>
       <div className={cl.commentBlock}>
+        <button onClick={() => setViewComments(!viewComments)}>{viewComments?'Cкрыть коментарии':'Показать коментарии'}</button>
+
         {rezervComment ? (
           <h2>Коментариев ({rezervComment.length})</h2>
         ) : (
           <h2>Коментарии(0)</h2>
         )}
-        {rezervComment?.map((el) => (
+        {viewComments && rezervComment?.map((el) => (
           <div key={el.commentId}>
-            <Comments messages={el.comment} email={el.user}></Comments>
+            <Comments commentId={el.commentId} messages={el.comment} email={el.user}></Comments>
           </div>
-        ))}
+        )) }
       </div>
     </div>
   );

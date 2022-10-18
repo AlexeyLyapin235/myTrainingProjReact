@@ -48,8 +48,8 @@
 }
 
 .closeChat{
-position: absolute;
-    right: 20px;
+    position: absolute;
+    right: 0px;
     top: 0px;
     width: 96%;
     height: 15px;

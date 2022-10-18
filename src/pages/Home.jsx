@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState,useEffect,useMemo  }  from "react";
 import CardTocart from "../components/UI/CardTocart/CardTocart";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -11,34 +11,19 @@ import {
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import AddTocartHome from "../components/adminTools/AddTocartHome";
 import cl from "./Home.module.css";
-import { useState } from "react";
 import SearchInput from "../components/UI/input/SearchInput";
-import { useEffect } from "react";
 import DropDawfFilter from "../components/UI/dropdown/DropDown";
 import PaginatedButton from "../components/UI/buttons/PaginatedButton";
-import { useMemo } from "react";
-import { db } from "../index.js";
-import {
-  collection,
-  query,
-  getDocs,
-  deleteDoc,
-  setDoc,
-  doc,
-} from "firebase/firestore";
-import Chat from "../components/Chat";
-import OpenRealTimeChat from "../components/OpenRealTimeChat";
-
+import Chat from "../components/UI/chat/Chat";
+import OpenRealTimeChat from "../components/UI/chat/OpenRealTimeChat";
+import { filterData, filtersPrice, paginatedFilter, seacrhed } from "../utils/filters";
+import { usePaginate } from "../hooks/paginated";
+import { useGetTocarts, useTocartTools } from "../hooks/tocartsTools";
+import { useChat } from "../hooks/chat";
 const Home = () => {
-  const getTocarts = async () => {
-    dispatch(removeTocart([]));
-    const q = query(collection(db, "test"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      dispatch(adminAddTocart(doc.data()));
-    });
-  };
-
+  const dispatch = useDispatch();
+ 
+  const {getTocarts,deleteTocartHome} = useGetTocarts(removeTocart,adminAddTocart)
   useEffect(() => {
     dispatch(removeTocart([]));
     getTocarts();
@@ -49,147 +34,66 @@ const Home = () => {
   const myAdmin = useSelector((state) => state.myState.admin);
   const tocartHome = useSelector((state) => state.myState.tocart);
   const userEmail = useSelector((state) => state.myState.email);
-  const dispatch = useDispatch();
+
   const [sortTocart, setSortTocart] = useState("");
   const [search, setSearch] = useState("");
   const [newTocartUrl, setUrl] = useState("");
   const [newTocartName, setName] = useState("");
   const [newTocartPrice, setPrice] = useState("");
   const [rezervTocart, setRezervTocart] = useState([]);
+  
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [tocarPerPage] = useState(5);
-  const totalPageCount = [];
+  const {watchPaginated,paginations,totalPageCount,currentPage} = usePaginate(tocartHome,setRezervTocart);
   useEffect(() => {
     watchPaginated();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tocartHome, currentPage,chat]);
 
-  const watchPaginated = async () => {
-    const lastIndex = currentPage * tocarPerPage;
-    const firsIndex = lastIndex - tocarPerPage;
-    const paginatedArr = await tocartHome.slice(firsIndex, lastIndex);
-    setRezervTocart(paginatedArr);
-  };
-
-  const paginations = (page) => {
-    setCurrentPage(page);
-  };
-
   useEffect(() => {
-    if (search !== "") {
-      const filtered = tocartHome.filter((el) =>
-        el.title.toLowerCase().includes(search.toLocaleLowerCase())
-      );
-      setRezervTocart(filtered);
-    } else {
-      setRezervTocart(tocartHome);
-      watchPaginated();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    seacrhed(search,tocartHome,setRezervTocart,watchPaginated)
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useMemo(() => {
-    const count = tocartHome.length;
-    const total = Math.ceil(count / 5);
-    for (let i = 0; i < total; i++) {
-      totalPageCount.push(i);
-    }
+    paginatedFilter(tocartHome,totalPageCount)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rezervTocart]);
-
+ 
+  const sortMax = "Цена по увелечению";
+  const sortMin = "Цена по уменьшению";
   useEffect(() => {
-    if (sortTocart === "Цена по увелечению") {
-      const sorted = rezervTocart
-        .slice()
-        .sort((a, b) => (Number(a.price) > Number(b.price) ? 1 : -1));
-      setRezervTocart(sorted);
-    }
-    if (sortTocart === "Цена по уменьшению") {
-      const sortedMin = rezervTocart
-        .slice()
-        .sort((a, b) => (Number(a.price) < Number(b.price) ? 1 : -1));
-      setRezervTocart(sortedMin);
-    }
+  filtersPrice(rezervTocart,setRezervTocart,sortTocart,sortMax,sortMin)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortTocart]);
 
-  const addTocart = (price, name, url, id) => {
-    const basket = {
-      price,
-      name,
-      url,
-      count: 1,
-      id,
-    };
-    const findElem = tocart.findIndex((el) => el.id === basket.id);
-    findElem === -1
-      ? dispatch(addTocartBasket(basket))
-      : dispatch(addCount(findElem));
-  };
-  const deleteTocartHome = async (id) => {
-    await deleteDoc(doc(db, "test", `${id}`));
-    getTocarts();
-  };
-  const adminToolAddTocart = async () => {
-    if (newTocartUrl && newTocartName && newTocartPrice !== "") {
-      const keyCollection = Date.now();
-      await setDoc(doc(db, "test", `${keyCollection}`), {
-        url: newTocartUrl,
-        title: newTocartName,
-        price: newTocartPrice,
-        id: keyCollection,
-        comment: [],
-      });
-      setUrl("");
-      setName("");
-      setPrice("");
-      getTocarts();
-    }
-  };
+  
+  const [addTocart,adminToolAddTocart]  = useTocartTools(getTocarts,setUrl,setName,setPrice,tocart,addTocartBasket,addCount)
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const dbs = getDatabase();
   const starCountRef = ref(dbs, "users/");
-  const filter = (data) => {
-    const arr = [];
-    for (let key in data) {
-      let obj = {
-        emai: data[key].email,
-        mesages: data[key].message,
-        id: key,
-      };
-      arr.push(obj);
-    }
-    return arr;
-  };
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-
     onValue(starCountRef, (snapshot) => {
       const data = snapshot.val();
-      const mesenger = filter(data);
+      const mesenger = filterData(data);
       setMessages(mesenger);
     });
+     
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const addMessages = () => {
+    const keyCol = Date.now();
+    const dbws = getDatabase();
     set(ref(dbws, "users/" + keyCol), {
       email: userEmail,
       message: message,
     });
     setMessage("");
   };
-  const keyCol = Date.now();
-  const dbws = getDatabase();
-
-  const openChat = () => {
-    return dispatch(setChat(true));
-  };
-  const closeChat = () => {
-    return dispatch(setChat(false));
-  };
+  
+  const {openChat,closeChat} = useChat(setChat)
   return (
     <div>
       <SearchInput value={search} setSearch={setSearch} />
@@ -204,7 +108,7 @@ const Home = () => {
               setUrl={setUrl}
               setName={setName}
               setPrice={setPrice}
-              adminToolAddTocart={adminToolAddTocart}
+              adminToolAddTocart={()=>adminToolAddTocart(newTocartUrl,newTocartName,newTocartPrice )}
             />
           </div>
         )}
@@ -219,7 +123,6 @@ const Home = () => {
             key={el.id}
             tocartId={el.id}
             addTocart={addTocart}
-            commentsArray={el.comment}
             el={el}
           />
         ))}
@@ -238,7 +141,7 @@ const Home = () => {
             messages={messages}
             message={message}
             setMessage={setMessage}
-            addMessages={addMessages}
+            addMessages={()=> addMessages(userEmail,message,setMessage)}
           ></Chat>
         ) : (
           <OpenRealTimeChat openChat={openChat}></OpenRealTimeChat>
